@@ -1,2 +1,3 @@
-# blazor-webassembly-security-azuread
-This repo contains the source code for the "Blazor WebAssembly Security with Azure AD and Azure AD B2C" series of articles on Code Maze
+# Using Azure Active Directory to Secure a Blazor WebAssembly Standalone App
+## https://code-maze.com/using-azure-active-directory-to-secure-a-blazor-webassembly-standalone-app
+This repo contains the source code for the "Using Azure Active Directory to Secure a Blazor WebAssembly Standalone App" article on Code Maze
