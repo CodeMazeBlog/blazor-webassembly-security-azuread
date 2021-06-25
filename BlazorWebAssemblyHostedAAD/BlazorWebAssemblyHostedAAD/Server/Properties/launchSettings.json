@@ -1,6 +1,6 @@
 {
 	"profiles": {
-		"BlazorWasmStandaloneAAD": {
+		"BlazorWebAssemblyHostedAAD.Server": {
 			"commandName": "Project",
 			"dotnetRunMessages": "true",
 			"launchBrowser": true,
