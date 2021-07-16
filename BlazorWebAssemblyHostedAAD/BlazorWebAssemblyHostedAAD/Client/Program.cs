@@ -24,11 +24,14 @@ namespace BlazorWebAssemblyHostedAAD.Client
 			// Supply HttpClient instances that include access tokens when making requests to the server project
 			builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("BlazorWebAssemblyHostedAAD.ServerAPI"));
 
-			builder.Services.AddMsalAuthentication(options =>
+			builder.Services.AddMsalAuthentication<RemoteAuthenticationState, CustomUserAccount>(options =>
 			{
 				builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
 				options.ProviderOptions.DefaultAccessTokenScopes.Add("api://862c81f0-91e8-476e-8646-b7c297967ec9/BlazorHostedAPI.Access");
-			});
+				options.UserOptions.RoleClaim = "appRole";
+			})
+			.AddAccountClaimsPrincipalFactory<RemoteAuthenticationState, CustomUserAccount,
+				CustomAccountFactory>();
 
 			await builder.Build().RunAsync();
 		}

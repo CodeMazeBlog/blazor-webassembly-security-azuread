@@ -7,10 +7,19 @@
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 @code {
-    private int currentCount = 0;
+	[CascadingParameter]
+	public Task<AuthenticationState> AuthState { get; set; }
 
-    private void IncrementCount()
-    {
-        currentCount++;
-    }
+	private int currentCount = 0;
+
+	private async Task IncrementCount()
+	{
+		var authState = await AuthState;
+		var user = authState.User;
+
+		if (user.IsInRole("viewer"))
+			currentCount++;
+		else if (user.IsInRole("administrator"))
+			currentCount--;
+	}
 }

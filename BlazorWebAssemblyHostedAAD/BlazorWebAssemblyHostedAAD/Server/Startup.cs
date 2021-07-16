@@ -21,12 +21,16 @@ namespace BlazorWebAssemblyHostedAAD.Server
 
 		public IConfiguration Configuration { get; }
 
-		// This method gets called by the runtime. Use this method to add services to the container.
-		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-				.AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
+				.AddMicrosoftIdentityWebApi(options =>
+				{
+					Configuration.Bind("AzureAd", options);
+					options.TokenValidationParameters.RoleClaimType =
+						"http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
+				},
+				options => { Configuration.Bind("AzureAd", options); });
 
 			services.AddControllersWithViews();
 			services.AddRazorPages();

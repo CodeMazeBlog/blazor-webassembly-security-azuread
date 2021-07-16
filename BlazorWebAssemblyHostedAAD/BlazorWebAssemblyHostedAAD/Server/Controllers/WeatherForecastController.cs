@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BlazorWebAssemblyHostedAAD.Server.Controllers
 {
-	[Authorize]
+	[Authorize(Roles = "administrator")]
 	[ApiController]
 	[Route("[controller]")]
 	public class WeatherForecastController : ControllerBase
